@@ -18,3 +18,8 @@ class TestGame(TestCase):
         self.assertIs(game.is_valid("IGUANE"), True)
         self.assertIs(game.is_valid("BUFALO"), False)
         self.assertIs(game.is_valid(""), False)
+
+    def test_unkown_word_is_invalid(self):
+        new_game = Game()
+        new_game.grid = list("KWIENFUQW")
+        self.assertIs(new_game.is_valid("FEUN"), False)
