@@ -1,4 +1,5 @@
 import string
+import requests
 from random import choice
 
 class Game:
@@ -14,6 +15,11 @@ class Game:
 
     def is_valid(self, word):
         if len(word) > 0:
+            #check if word is valid english
+            is_english = requests.get("https://wagon-dictionary.herokuapp.com/"+word)
+            json_is_english = is_english.json()
+            if json_is_english["found"] != True:
+                return False
             grid_letters = self.grid.copy()
             for letter in word:
                 if letter in grid_letters:
